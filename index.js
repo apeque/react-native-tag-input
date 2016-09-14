@@ -21,7 +21,7 @@ class EmailInput extends Component {
     };
 
     this.wrapperWidth = width;
-    this.parseEmails = this.parseEmails.bind(this);
+    this.parseInput = this.parseInput.bind(this);
     this.onChange = this.onChange.bind(this);
     this.pop = this.pop.bind(this);
     this.calculateWidth = this.calculateWidth.bind(this);
@@ -75,10 +75,10 @@ class EmailInput extends Component {
     let parseWhen = [",", " ", ";"];
 
     if (parseWhen.indexOf(lastTyped) > -1)
-      this.parseEmails();
+      this.parseInput();
     }
 
-  parseEmails() {
+  parseInput() {
     let {text} = this.state;
     let {value} = this.props;
     let regex = this.props.regex || /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
@@ -93,6 +93,9 @@ class EmailInput extends Component {
   onKeyPress(event) {
     if (this.state.text === "" && event.nativeEvent && event.nativeEvent.key == "Backspace") {
       this.pop();
+    }
+    if(this.props.onKeyPress){
+      this.props.onKeyPress(this.state.text);
     }
   }
   focus() {
@@ -160,7 +163,7 @@ class EmailInput extends Component {
               width: width,
               color: inputColor
             }
-          ]} onChange={this.onChange.bind(this)} onSubmitEditing={this.parseEmails}/>
+          ]} onChange={this.onChange.bind(this)} onSubmitEditing={this.parseInput}/>
         </View>
       </View>
     </TouchableWithoutFeedback>
