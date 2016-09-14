@@ -157,12 +157,6 @@ class EmailInput extends Component {
           width: this.state.inputWidth,
           height: 36
         }}>
-          <TextInput ref="emailInput" {...inputProps} blurOnSubmit={false} onKeyPress={this.onKeyPress.bind(this)} value={this.state.text} style={[
-            styles.textInput, {
-              width: width,
-              color: inputColor
-            }
-          ]} onChange={this.onChange.bind(this)} onSubmitEditing={this.parseInput}/>
         </View>
       </View>
     </TouchableWithoutFeedback>
