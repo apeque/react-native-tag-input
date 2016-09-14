@@ -94,9 +94,6 @@ class EmailInput extends Component {
     if (this.state.text === "" && event.nativeEvent && event.nativeEvent.key == "Backspace") {
       this.pop();
     }
-    if(this.props.onKeyPress){
-      this.props.onKeyPress(this.state.text);
-    }
   }
   focus() {
     if (this.refs.emailInput)
@@ -113,7 +110,9 @@ class EmailInput extends Component {
     emails.splice(index, 1);
     this.props.onChange(emails);
     this.focus();
-
+    if(this.props.onRemove){
+      this.props.onRemove(index);
+    }
   }
   render() {
     let {text} = this.state;
